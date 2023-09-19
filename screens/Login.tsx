@@ -7,11 +7,13 @@ const Login = () => {
     const [rePass, setRepass] = useState('');
     const [isRegister, setisRegister] = useState(false );
 
-
     const handleLogin = () => {
         console.log(email, password);
     }
 
+    const handleRegister = () => {
+        console.log('Register')
+    }
     return (
         <ImageBackground source={require("../assets/images/bg-3.png")}
             resizeMode='cover' style={styles.container}>
@@ -50,7 +52,8 @@ const Login = () => {
                 </View>
             </View>
 
-            <TouchableOpacity style={styles.buttonLogin}>
+            <TouchableOpacity style={styles.buttonLogin} 
+            onPress={isRegister ? handleRegister : handleLogin}>
                 <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
 
