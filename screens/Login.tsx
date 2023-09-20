@@ -1,11 +1,12 @@
-import { View, Text, SafeAreaView, StyleSheet, ImageBackground, TextInput, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, ImageBackground, TextInput, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 
 const Login = () => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState(''); 
+    const [password, setPassword] = useState('');
     const [rePass, setRepass] = useState('');
-    const [isRegister, setisRegister] = useState(false );
+    const [isRegister, setisRegister] = useState(false);
+    const [isLogin, setLogin] = useState(false)
 
     const handleLogin = () => {
         console.log(email, password);
@@ -17,7 +18,10 @@ const Login = () => {
     return (
         <ImageBackground source={require("../assets/images/bg-3.png")}
             resizeMode='cover' style={styles.container}>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <ScrollView style={{ flex: 1, }}>
+
+                <Text style={{ fontWeight: 'bold', fontSize: 28, color: '#212121', marginVertical: 20 }}>{isRegister ? 'Register' : 'Login'}</Text>
+
                 <View style={styles.loginformcontainer}>
                     <View style={styles.inputcontainer}>
                         <Text style={styles.inputlabel}>Email</Text>
@@ -50,18 +54,20 @@ const Login = () => {
                             style={styles.input} />
                     </View>)}
                 </View>
-            </View>
 
-            <TouchableOpacity style={styles.buttonLogin} 
-            onPress={isRegister ? handleRegister : handleLogin}>
-                <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
+                <View style={{ height: 20, }} />
 
-            <TouchableOpacity 
-            onPress={() => setisRegister(true)}
-            style={styles.buttonRegister}>
-                <Text> Register</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonLogin}
+                    onPress={isRegister ? handleRegister : handleLogin}>
+                    <Text style={styles.buttonText}>{isRegister ? 'Sign in' : 'Login'}</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => setisRegister(!isRegister)}
+                    style={styles.buttonRegister}>
+                    <Text>{isRegister ? 'Login' : 'Register'}</Text>
+                </TouchableOpacity>
+            </ScrollView>
 
         </ImageBackground>
     )
@@ -101,14 +107,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 100,
     },
-    buttonText:{
+    buttonText: {
         fontWeight: 'bold',
         fontSize: 18,
         textTransform: 'uppercase',
         color: '#fafafa'
     },
     buttonRegister: {
-        marginVertical: 20,
+        marginVertical: 10,
         justifyContent: 'center',
         alignItems: 'center'
     }
